@@ -1,7 +1,6 @@
 extern crate secp256k1;
 
 use bitcoin_address_generator::Config;
-use secp256k1::{PublicKey, Secp256k1, SecretKey};
 
 fn main() {
     let generator = bitcoin_address_generator::run(Config {
