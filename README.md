@@ -57,14 +57,6 @@ Generate a Bitcoin address using a specific private key and version:
 ./target/release/bitcoin_address_generator -p <PRIVATE_KEY> -v <VERSION>
 ```
 
-#### Key Functions and Structures
-
-- `Config`: Holds the configuration for the address generation, including optional private key and version.
-- `RunResult`: Represents the result of the address generation, including the private key, public key, and address.
-- `RunError`: Enum for handling errors during the address generation process.
-- `get_key_pair`: Generates a key pair (private and public key) based on the provided configuration.
-- `run`: The main function that performs the address generation process.
-
 ## Dependencies
 
 The project relies on several external crates for cryptographic operations:
