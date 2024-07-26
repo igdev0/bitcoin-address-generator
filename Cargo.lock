@@ -68,20 +68,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "bitcoin-address-generator"
-version = "0.1.0"
-dependencies = [
- "base58check",
- "clap",
- "hashes",
- "hex",
- "rand",
- "ripemd",
- "secp256k1",
- "sha2 0.10.8",
-]
-
-[[package]]
 name = "block-buffer"
 version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -109,6 +95,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fa79dedbb091f449f1f39e53edf88d5dbe95f895dae6135a8d7b881fb5af73f5"
 dependencies = [
  "byte-tools",
+]
+
+[[package]]
+name = "btc-addgen"
+version = "0.1.0"
+dependencies = [
+ "base58check",
+ "clap",
+ "hashes",
+ "hex",
+ "rand",
+ "ripemd",
+ "secp256k1",
+ "sha2 0.10.8",
 ]
 
 [[package]]

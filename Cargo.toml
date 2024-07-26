@@ -1,5 +1,6 @@
 [package]
-name = "bitcoin-address-generator"
+name = "btc-addgen"
+description = "Bitcoin address generator"
 version = "0.1.0"
 edition = "2021"
 
