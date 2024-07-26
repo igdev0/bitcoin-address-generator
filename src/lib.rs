@@ -61,8 +61,7 @@ pub fn run(config: Config) -> Result<RunResult, RunError> {
             let sha256_hash = Sha256::digest(&serialized_public_key[1..]);
 
             // Step 4: Perform RIPEMD-160 hashing on the result of SHA-256
-            let mut ripemd160_hash = Ripemd160::digest(&sha256_hash);
-            // println!("RIPEMD-160 Hash: {:?}", ripemd160_hash);
+            let ripemd160_hash = Ripemd160::digest(&sha256_hash);
 
             // Step 5: Read the version code
             let version: u8 = config.version.unwrap_or(0x00);
