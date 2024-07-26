@@ -33,6 +33,7 @@ pub struct Config {
 }
 fn get_key_pair(config: &Config) -> Result<(SecretKey, PublicKey), String> {
     let secp = Secp256k1::new();
+
     if let Some(private_key) = &config.private_key {
         let data =
             hex::decode(&private_key).expect("Unable to decode secret key from the data given.");
@@ -73,7 +74,7 @@ pub fn run(config: Config) -> Result<RunResult, RunError> {
 
             Ok(RunResult {
                 address: bitcoin_address,
-                private_key: secret_key.secret_bytes().to_base58check(0x80), //0x80 is the version byte for WIF
+                private_key: secret_key.display_secret().to_string(),
                 public_key: hex::encode(public_key.serialize_uncompressed()),
             })
         }
