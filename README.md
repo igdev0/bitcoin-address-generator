@@ -12,18 +12,30 @@ This project is a Bitcoin address generator written in Rust. It leverages variou
 
 ## Installation
 
-To install this project, ensure you have Rust and Cargo installed on your system. Clone this repository and navigate to its directory, then run the following command:
+To install this project, ensure you have Rust and Cargo installed on your system. You can install it directly from crates.io or from the source.
 
+### Install from crates.io
+
+To install the Bitcoin address generator directly from crates.io, use the following command:
+
+```sh
+cargo install btc-addgen
+```
+
+### Install from source
+To install from the source, clone this repository and navigate to its directory, then run the following command:
 ```sh
 cargo build --release
 ```
 
 ## Usage
-
-To use the Bitcoin address generator, run the compiled binary with optional command-line arguments:
-
+### Using the compiled binary
 ```sh
 ./target/release/bitcoin_address_generator [OPTIONS]
+```
+### Using the installed cargo binary
+```sh
+btc-addgen [OPTIONS]
 ```
 
 ### Command-line Options
