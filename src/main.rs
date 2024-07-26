@@ -6,7 +6,7 @@ fn main() {
     let version = Arg::new("version").short('v');
     let app = Command::new("app").args([private_key, version]);
     let matches = app.get_matches();
-    let mut conf = bitcoin_address_generator::Config {
+    let mut conf = btc_addgen::Config {
         private_key: None,
         version: None,
     };
@@ -19,7 +19,7 @@ fn main() {
         conf.version = Some(v);
     }
 
-    let generator = bitcoin_address_generator::run(conf);
+    let generator = btc_addgen::run(conf);
 
     if let Ok(result) = generator {
         println!("BTC Address: {}", result.address);
