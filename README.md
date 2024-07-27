@@ -42,6 +42,7 @@ btc-addgen [OPTIONS]
 
 - `-p, --private-key <PRIVATE_KEY>`: Specify a private key in hexadecimal format.
 - `-v, --version <VERSION>`: Specify the version byte in hexadecimal format (e.g., `0x00` for mainnet).
+- `-u, --use-uncompressed <USE_UNCOMPRESSED>`: Specify if the address should be made from compressed pub key (defaults to false).
 
 ### Example
 
