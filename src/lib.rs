@@ -13,6 +13,7 @@ use sha2::{Digest, Sha256};
 pub struct RunResult {
     pub private_key: String,
     pub public_key: String,
+    pub public_key_compressed: String,
     pub address: String,
 }
 
@@ -30,6 +31,7 @@ impl Display for RunError {
 pub struct Config {
     pub private_key: Option<String>,
     pub version: Option<u8>,
+    pub use_uncompressed: Option<bool>,
 }
 fn get_key_pair(config: &Config) -> Result<(SecretKey, PublicKey), String> {
     let secp = Secp256k1::new();
@@ -56,11 +58,14 @@ pub fn run(config: Config) -> Result<RunResult, RunError> {
     match key_pair {
         Ok((secret_key, public_key)) => {
             // Step 2: Generate the public key
-            let serialized_public_key = public_key.serialize_uncompressed();
+            let serialized_public_key = public_key.serialize();
+            let serialized_uncompressed_public_key = public_key.serialize_uncompressed();
 
             // Step 3: Perform SHA-256 hashing on the public key
-            let sha256_hash = Sha256::digest(&serialized_public_key[1..]);
-
+            let mut sha256_hash = Sha256::digest(&serialized_public_key[1..]);
+            if config.use_uncompressed.unwrap_or(false) {
+                sha256_hash = Sha256::digest(&serialized_uncompressed_public_key[1..]);
+            }
             // Step 4: Perform RIPEMD-160 hashing on the result of SHA-256
             let ripemd160_hash = Ripemd160::digest(&sha256_hash);
 
@@ -71,10 +76,10 @@ pub fn run(config: Config) -> Result<RunResult, RunError> {
             //      6.1 Prepend the version
             //      6.2 Double the SHA256 & append the checksum (first 4 digits) to the payload (version + ripemd160 hash)
             let bitcoin_address = ripemd160_hash.to_base58check(version);
-
             Ok(RunResult {
                 address: bitcoin_address,
                 private_key: secret_key.display_secret().to_string(),
+                public_key_compressed: hex::encode(public_key.serialize()),
                 public_key: hex::encode(public_key.serialize_uncompressed()),
             })
         }
